@@ -30,6 +30,9 @@ def _unpack_explanation(result):
 
 
 def _explain_query(connection, q, params):
+    if not SilkyConfig().SILKY_EXPLAIN_QUERIES:
+        return None
+
     if connection.features.supports_explaining_query_execution:
         if SilkyConfig().SILKY_ANALYZE_QUERIES:
             # Work around some DB engines not supporting analyze option
